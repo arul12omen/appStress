@@ -49,7 +49,11 @@ class _RiwayatPageState extends State<RiwayatPage> {
         final date = DateTime.parse(item.createdAt);
         if (date.month != selectedM) return false;
         if (selectedW == 0) return true;
+
         int itemWeek = ((date.day - 1) ~/ 7) + 1;
+        if (itemWeek > 4)
+          itemWeek = 4; // Pastikan tanggal 29-31 masuk minggu ke-4
+
         return itemWeek == selectedW;
       }).toList();
     });
