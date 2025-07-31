@@ -20,15 +20,16 @@ class AuthController {
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
-      final userId = data['user_id']; // pastikan backend mengirim user_id
-      final username = data['username']; // ambil username dari response
+      final userId = data['user_id'];
+      final username = data['username'];
+      final nama = data['nama'];
 
-      // Simpan user_id dan username ke SharedPreferences
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setInt('user_id', userId);
       await prefs.setString('username', username);
+      await prefs.setString('nama', nama);
 
-      print("Login berhasil: $username");
+      print("Login berhasil: $username ($nama)");
       return true;
     } else {
       print("Login gagal: ${response.body}");
@@ -42,6 +43,7 @@ class AuthController {
       url,
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
+        'nama': user.nama,
         'username': user.email,
         'password': user.password,
       }),

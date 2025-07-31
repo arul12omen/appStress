@@ -10,17 +10,19 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final TextEditingController namaCtrl = TextEditingController();
   final TextEditingController emailCtrl = TextEditingController();
   final TextEditingController passCtrl = TextEditingController();
   final TextEditingController confirmCtrl = TextEditingController();
   final AuthController auth = AuthController();
 
   void _register() async {
+    final nama = namaCtrl.text.trim();
     final email = emailCtrl.text.trim();
     final password = passCtrl.text.trim();
     final confirm = confirmCtrl.text.trim();
 
-    if (email.isEmpty || password.isEmpty || confirm.isEmpty) {
+    if (nama.isEmpty || email.isEmpty || password.isEmpty || confirm.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Semua kolom harus diisi')),
       );
@@ -34,7 +36,7 @@ class _RegisterPageState extends State<RegisterPage> {
       return;
     }
 
-    final user = UserModel(email: email, password: password);
+    final user = UserModel(nama: nama, email: email, password: password);
     final result = await auth.register(user);
 
     if (result) {
@@ -79,6 +81,21 @@ class _RegisterPageState extends State<RegisterPage> {
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
                     color: Colors.blueAccent,
+                  ),
+                ),
+                const SizedBox(height: 24),
+                TextField(
+                  controller: namaCtrl,
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.grey[100],
+                    hintText: 'Nama',
+                    prefixIcon: const Icon(Icons.person),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide.none,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 24),

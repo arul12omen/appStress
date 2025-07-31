@@ -9,7 +9,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  String username = '';
+  String nama = '';
   int _selectedIndex = 3;
 
   @override
@@ -21,7 +21,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Future<void> _loadUser() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      username = prefs.getString('username') ?? 'User';
+      nama = prefs.getString('nama') ?? 'User';
     });
   }
 
@@ -76,7 +76,7 @@ class _ProfilePageState extends State<ProfilePage> {
               children: [
                 const SizedBox(height: 12),
                 Text(
-                  username,
+                  nama,
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,

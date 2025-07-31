@@ -16,7 +16,8 @@ class _LoginPageState extends State<LoginPage> {
   final AuthController auth = AuthController();
 
   void _login() async {
-    final user = UserModel(email: emailCtrl.text, password: passCtrl.text);
+    final user =
+        UserModel(nama: '', email: emailCtrl.text, password: passCtrl.text);
     final result = await auth.login(user);
 
     if (result) {
