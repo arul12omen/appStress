@@ -10,6 +10,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   String nama = '';
+  String jurusan = '';
   int _selectedIndex = 3;
 
   @override
@@ -22,6 +23,7 @@ class _ProfilePageState extends State<ProfilePage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       nama = prefs.getString('nama') ?? 'User';
+      jurusan = prefs.getString('jurusan') ?? '';
     });
   }
 
@@ -77,6 +79,15 @@ class _ProfilePageState extends State<ProfilePage> {
                 const SizedBox(height: 12),
                 Text(
                   nama,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  jurusan,
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,

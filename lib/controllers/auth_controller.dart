@@ -23,11 +23,13 @@ class AuthController {
       final userId = data['user_id'];
       final username = data['username'];
       final nama = data['nama'];
+      final jurusan = data['jurusan'];
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setInt('user_id', userId);
       await prefs.setString('username', username);
       await prefs.setString('nama', nama);
+      await prefs.setString('jurusan', jurusan);
 
       print("Login berhasil: $username ($nama)");
       return true;
