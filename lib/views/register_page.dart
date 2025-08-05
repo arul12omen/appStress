@@ -10,6 +10,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final TextEditingController jurusanCtrl = TextEditingController();
   final TextEditingController namaCtrl = TextEditingController();
   final TextEditingController emailCtrl = TextEditingController();
   final TextEditingController passCtrl = TextEditingController();
@@ -18,11 +19,16 @@ class _RegisterPageState extends State<RegisterPage> {
 
   void _register() async {
     final nama = namaCtrl.text.trim();
+    final jurusan = jurusanCtrl.text.trim();
     final email = emailCtrl.text.trim();
     final password = passCtrl.text.trim();
     final confirm = confirmCtrl.text.trim();
 
-    if (nama.isEmpty || email.isEmpty || password.isEmpty || confirm.isEmpty) {
+    if (nama.isEmpty ||
+        jurusan.isEmpty ||
+        email.isEmpty ||
+        password.isEmpty ||
+        confirm.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Semua kolom harus diisi')),
       );
@@ -36,7 +42,8 @@ class _RegisterPageState extends State<RegisterPage> {
       return;
     }
 
-    final user = UserModel(nama: nama, email: email, password: password);
+    final user = UserModel(
+        nama: nama, jurusan: jurusan, email: email, password: password);
     final result = await auth.register(user);
 
     if (result) {
@@ -92,6 +99,21 @@ class _RegisterPageState extends State<RegisterPage> {
                     fillColor: Colors.grey[100],
                     hintText: 'Nama',
                     prefixIcon: const Icon(Icons.person),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide.none,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: jurusanCtrl,
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.grey[100],
+                    hintText: 'Jurusan',
+                    prefixIcon: const Icon(Icons.school),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide.none,

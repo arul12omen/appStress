@@ -46,6 +46,7 @@ class AuthController {
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
         'nama': user.nama,
+        'jurusan': user.jurusan,
         'username': user.email,
         'password': user.password,
       }),
